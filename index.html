@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utdam's Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Utdam's Dashboard</h1>
+        </header>
+        <nav>
+            <button id="calendarTab" class="active">Calendar</button>
+            <button id="pomodoroTab">Pomodoro</button>
+            <button id="youtubeTab">YouTube</button>
+        </nav>
+        <div id="profileImage">
+            <img src="img/profile2.png" alt="Profile Image" id="profileImg">
+        </div>
+        <main>
+            <section id="calendarSection">
+                <div id="calendarView">
+                    <div id="yearView">
+                        <h2>2024</h2>
+                        <div id="monthsGrid"></div>
+                    </div>
+                    <div id="monthView" class="hidden">
+                        <button id="backToYear">&larr; Back to Year View</button>
+                        <h2 id="currentMonthYear"></h2>
+                        <div id="weekdays">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        <div id="daysGrid"></div>
+                    </div>
+                </div>
+                <div id="eventForm" class="hidden">
+                    <h3>Add/Edit Event</h3>
+                    <input type="text" id="eventTitle" placeholder="Event Title">
+                    <input type="color" id="eventColor" value="#4CAF50">
+                    <textarea id="eventComment" placeholder="Comment"></textarea>
+                    <button id="saveEvent">Save</button>
+                    <button id="cancelEvent">Cancel</button>
+                </div>
+                <div id="eventDetails" class="hidden">
+                    <h3 id="eventDetailsTitle"></h3>
+                    <p id="eventDetailsComment"></p>
+                    <button id="editEvent">Edit</button>
+                    <button id="closeEventDetails">Close</button>
+                </div>
+            </section>
+            <section id="pomodoroSection" class="hidden">
+                <div id="pomodoroTimer">
+                    <h2>Pomodoro Timer</h2>
+                    <div id="timer">25:00</div>
+                    <div id="pomodoroControls">
+                        <select id="pomodoroType">
+                            <option value="25-5">25min work, 5min break</option>
+                            <option value="45-15">45min work, 15min break</option>
+                            <option value="60-20">60min work, 20min break</option>
+                        </select>
+                        <button id="startPomodoro">Start</button>
+                        <button id="resetPomodoro">Reset</button>
+                        <select id="ringtone">
+                            <option value="bell">Bell</option>
+                            <option value="chime">Chime</option>
+                            <option value="gong">Gong</option>
+                        </select>
+                    </div>
+                
+                </div>
+            </section>
+            <section id="youtubeSection" class="hidden">
+                <div id="youtubePlayer">
+                    <h2>YouTube Player</h2>
+                    <div id="youtubeControls">
+                        <input type="text" id="youtubeLink" placeholder="Paste YouTube link here">
+                        <button id="loadVideo">Load Video</button>
+                        <select id="downloadType">
+                            <option value="audio">Audio</option>
+                            <option value="video">Video</option>
+                        </select>
+                        <select id="downloadQuality">
+                            <option value="low">Low Quality</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="high">High Quality</option>
+                        </select>
+                        <button id="downloadMedia">Download</button>
+                    </div>
+                    <div id="player"></div>
+                    <div id="downloadInfo" class="hidden">
+                        <h3>Download Information</h3>
+                        <p id="downloadDetails"></p>
+                        <button id="startDownload">Start Download</button>
+                        <button id="cancelDownload">Cancel</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
