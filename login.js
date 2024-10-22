@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', theme);
 
             // Redirect to dashboard
-            window.location.href = 'https://utdsong.github.io/app/productivity.html';
+            window.location.href = 'https://utdsong.github.io/app/profile-setup.html';
         });
     }
 });
