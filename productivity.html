@@ -17,6 +17,33 @@
             width: 100%;
             aspect-ratio: 16 / 9;
         }
+        #profileSetupSection {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        #profilePreview {
+            display: block;
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+        .theme-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        .theme-option {
+            display: flex;
+            align-items: center;
+        }
+        .theme-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -25,6 +52,7 @@
             <h1>Utdam's Dashboard</h1>
         </header>
         <nav>
+            <button id="profileSetupTab">Profile Setup</button>
             <button id="calendarTab" class="active">Calendar</button>
             <button id="pomodoroTab">Pomodoro</button>
             <button id="youtubeTab">YouTube</button>
@@ -33,6 +61,34 @@
             <img src="img/profile2.png" alt="Profile Image" id="profileImg">
         </div>
         <main>
+            <section id="profileSetupSection" class="hidden">
+                <h2>Set Up Your Profile</h2>
+                <form id="profileSetupForm">
+                    <div class="form-group">
+                        <label for="profilePicture">Profile Picture</label>
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                        <img id="profilePreview" src="#" alt="Profile Preview" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label>Choose Your Theme</label>
+                        <div class="theme-options">
+                            <div class="theme-option">
+                                <input type="radio" id="green" name="theme" value="green" checked>
+                                <label for="green">Green</label>
+                            </div>
+                            <div class="theme-option">
+                                <input type="radio" id="blue" name="theme" value="blue">
+                                <label for="blue">Blue</label>
+                            </div>
+                            <div class="theme-option">
+                                <input type="radio" id="purple" name="theme" value="purple">
+                                <label for="purple">Purple</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Save Profile</button>
+                </form>
+            </section>
             <section id="calendarSection">
                 <div id="calendarView">
                     <div id="yearView">
@@ -122,5 +178,66 @@
     <audio id="clickSound" src="sound/click.mp3" preload="auto"></audio>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileSetupForm = document.getElementById('profileSetupForm');
+            const profileInput = document.getElementById('profilePicture');
+            const profilePreview = document.getElementById('profilePreview');
+            const profileImg = document.getElementById('profileImg');
+
+            // Load saved profile image and theme
+            const savedProfileImage = localStorage.getItem('profileImage');
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedProfileImage) {
+                profileImg.src = savedProfileImage;
+                profilePreview.src = savedProfileImage;
+                profilePreview.style.display = 'block';
+            }
+
+            if (savedTheme) {
+                document.body.className = savedTheme + '-theme';
+                document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true;
+            }
+
+            profileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePreview.src = e.target.result;
+                        profilePreview.style.display = 'block';
+                        profileImg.src = e.target.result;
+                        localStorage.setItem('profileImage', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            profileSetupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const theme = document.querySelector('input[name="theme"]:checked').value;
+                localStorage.setItem('theme', theme);
+                document.body.className = theme + '-theme';
+                alert('Profile updated successfully!');
+            });
+
+            // Tab switching logic
+            const tabs = document.querySelectorAll('nav button');
+            const sections = document.querySelectorAll('main section');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    sections.forEach(s => s.classList.add('hidden'));
+                    const sectionToShow = document.getElementById(tab.id.replace('Tab', 'Section'));
+                    if (sectionToShow) {
+                        sectionToShow.classList.remove('hidden');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
