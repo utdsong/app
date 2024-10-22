@@ -8,13 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             
-            // Here you would typically send this data to a server
-            // For this example, we'll just store it in localStorage
+            // Store data in localStorage
             localStorage.setItem('fullName', fullName);
             localStorage.setItem('email', email);
 
             // Redirect to profile setup page
-            window.location.href = 'profile-setup.html';
+            window.location.href = 'https://utdsong.github.io/app/profile-setup.html';
         });
     }
 
@@ -38,12 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const theme = document.querySelector('input[name="theme"]:checked').value;
             
-            // Here you would typically send this data to a server
-            // For this example, we'll just store it in localStorage
+            // Store theme in localStorage
             localStorage.setItem('theme', theme);
 
             // Redirect to dashboard
-            window.location.href = 'utdsong.github.io/app/project-setup.html';
+            window.location.href = 'https://utdsong.github.io/app/productivity.html';
         });
     }
 });
