@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', theme);
 
             // Redirect to dashboard
-            window.location.href = 'project-setup.html';
+            window.location.href = 'utdsong.github.io/app/project-setup.html';
         });
     }
 });
