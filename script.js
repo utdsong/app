@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const clickSound = document.getElementById('clickSound');
+
+    function playClickSound() {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(error => console.error('Error playing sound:', error));
+    }
+
+    // Add click sound to all buttons
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', playClickSound);
+    });
+
     // Tab switching
     const tabs = document.querySelectorAll('nav button');
     const sections = document.querySelectorAll('main section');
@@ -45,7 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const monthElement = document.createElement('div');
             monthElement.classList.add('month');
             monthElement.textContent = month;
-            monthElement.addEventListener('click', () => showMonthView(index));
+            monthElement.addEventListener('click', () => {
+                playClickSound();
+                showMonthView(index);
+            });
             monthsGrid.appendChild(monthElement);
         });
     }
@@ -78,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             dayElement.addEventListener('click', () => {
+                playClickSound();
                 selectedDate = date;
                 if (events[date]) {
                     showEventDetails(date);
@@ -111,11 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     backToYear.addEventListener('click', () => {
+        playClickSound();
         yearView.classList.remove('hidden');
         monthView.classList.add('hidden');
     });
 
     saveEvent.addEventListener('click', () => {
+        playClickSound();
         if (selectedDate && eventTitle.value) {
             events[selectedDate] = {
                 title: eventTitle.value,
@@ -130,12 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     cancelEvent.addEventListener('click', () => {
+        playClickSound();
         eventForm.classList.add('hidden');
         eventTitle.value = '';
         eventComment.value = '';
     });
 
     editEvent.addEventListener('click', () => {
+        playClickSound();
         const event = events[selectedDate];
         if (event) {
             eventTitle.value = event.title;
@@ -146,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     closeEventDetails.addEventListener('click', () => {
+        playClickSound();
         eventDetails.classList.add('hidden');
     });
 
@@ -179,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     startPomodoro.addEventListener('click', () => {
+        playClickSound();
         if (timer) {
             clearInterval(timer);
             startPomodoro.textContent = 'Start';
@@ -202,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resetPomodoro.addEventListener('click', () => {
+        playClickSound();
         clearInterval(timer);
         const [work] = pomodoroType.value.split('-').map(Number);
         timeLeft = work * 60;
@@ -213,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     pomodoroType.addEventListener('change', () => {
+        playClickSound();
         const [work] = pomodoroType.value.split('-').map(Number);
         timeLeft = work * 60;
         isWorking = true;
@@ -252,11 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onPlayerReady(event) {
-        // Player is ready
         console.log('YouTube player is ready');
     }
 
     loadVideo.addEventListener('click', () => {
+        playClickSound();
         const videoId = extractVideoID(youtubeLink.value);
         if (videoId) {
             player.loadVideoById(videoId);
@@ -266,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadMedia.addEventListener('click', () => {
+        playClickSound();
         const videoId = extractVideoID(youtubeLink.value);
         if (videoId) {
             const type = downloadType.value;
@@ -282,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     startDownload.addEventListener('click', () => {
+        playClickSound();
         simulateDownload();
     });
 
@@ -307,8 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 
-
     cancelDownload.addEventListener('click', () => {
+        playClickSound();
         clearInterval(downloadInterval);
         downloadInfo.removeChild(progressBar);
         downloadInfo.classList.add('hidden');
@@ -319,12 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const match = url.match(regExp);
         return (match && match[7].length == 11) ? match[7] : false;
     }
-
-    // Initialize YouTube API
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 });

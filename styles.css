@@ -4,34 +4,36 @@
     --background-color: #333333;
     --text-color: #ffffff;
     --accent-color: #FFD700;
-}
-
-body {
+  }
+  
+  body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
-}
-
-.container {
-    max-width: 1200px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
-}
-
-header {
+    padding: 10px;
+  }
+  
+  header {
     text-align: center;
     margin-bottom: 20px;
-}
-
-h1 {
+  }
+  
+  h1 {
     color: var(--primary-color);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     font-size: 2.5em;
-}
-
-nav {
+  }
+  
+  nav {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -39,9 +41,9 @@ nav {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-nav button {
+  }
+  
+  nav button {
     padding: 15px 30px;
     font-size: 16px;
     background-color: transparent;
@@ -51,9 +53,9 @@ nav button {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-nav button::before {
+  }
+  
+  nav button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -62,61 +64,61 @@ nav button::before {
     height: 100%;
     background: rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-}
-
-nav button:hover::before {
+  }
+  
+  nav button:hover::before {
     left: 0;
-}
-
-nav button.active {
+  }
+  
+  nav button.active {
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-}
-
-#profileImage {
+  }
+  
+  #profileImage {
     text-align: center;
     margin-bottom: 20px;
-}
-
-#profileImg {
-    width: 150px;
-    height: 150px;
+  }
+  
+  #profileImg {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 5px solid var(--primary-color);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-section {
+  }
+  
+  section {
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-}
-
-section:hover {
+  }
+  
+  section:hover {
     transform: translateZ(30px) scale(1.02);
-}
-
-.hidden {
+  }
+  
+  .hidden {
     display: none;
-}
-
-/* Calendar Styles */
-#monthsGrid, #daysGrid {
+  }
+  
+  /* Calendar Styles */
+  #monthsGrid, #daysGrid {
     display: grid;
     gap: 10px;
-}
-
-#monthsGrid {
+  }
+  
+  #monthsGrid {
     grid-template-columns: repeat(4, 1fr);
-}
-
-#daysGrid {
+  }
+  
+  #daysGrid {
     grid-template-columns: repeat(7, 1fr);
-}
-
-.month, .day {
+  }
+  
+  .month, .day {
     border: 1px solid var(--primary-color);
     padding: 10px;
     text-align: center;
@@ -124,23 +126,23 @@ section:hover {
     border-radius: 10px;
     transition: all 0.3s ease;
     background-color: rgba(76, 175, 80, 0.1);
-}
-
-.month:hover, .day:hover {
+  }
+  
+  .month:hover, .day:hover {
     background-color: var(--primary-color);
     color: var(--text-color);
-}
-
-#weekdays {
+  }
+  
+  #weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin-bottom: 10px;
     font-weight: bold;
     color: var(--accent-color);
-}
-
-#backToYear {
+  }
+  
+  #backToYear {
     margin-bottom: 10px;
     padding: 10px 15px;
     background-color: var(--primary-color);
@@ -149,25 +151,25 @@ section:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-#backToYear:hover {
+  }
+  
+  #backToYear:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-}
-
-#eventForm, #eventDetails {
+  }
+  
+  #eventForm, #eventDetails {
     margin-top: 20px;
     padding: 20px;
     background-color: rgba(76, 175, 80, 0.1);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#eventForm input,
-#eventForm textarea,
-#eventForm button,
-#eventDetails button {
+  }
+  
+  #eventForm input,
+  #eventForm textarea,
+  #eventForm button,
+  #eventDetails button {
     display: block;
     width: 100%;
     margin-bottom: 10px;
@@ -177,42 +179,42 @@ section:hover {
     transition: all 0.3s ease;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
-}
-
-#eventForm button,
-#eventDetails button {
+  }
+  
+  #eventForm button,
+  #eventDetails button {
     background-color: var(--primary-color);
     color: var(--text-color);
     border: none;
     cursor: pointer;
-}
-
-#eventForm button:hover,
-#eventDetails button:hover {
+  }
+  
+  #eventForm button:hover,
+  #eventDetails button:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-}
-
-/* Pomodoro Styles */
-#pomodoroTimer {
+  }
+  
+  /* Pomodoro Styles */
+  #pomodoroTimer {
     text-align: center;
-}
-
-#timer {
+  }
+  
+  #timer {
     font-size: 72px;
     margin: 20px 0;
     color: var(--primary-color);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-#pomodoroControls {
+  }
+  
+  #pomodoroControls {
     display: flex;
     justify-content: center;
     gap: 10px;
-}
-
-#pomodoroControls select,
-#pomodoroControls button {
+  }
+  
+  #pomodoroControls select,
+  #pomodoroControls button {
     padding: 10px 15px;
     font-size: 16px;
     border: 1px solid var(--primary-color);
@@ -221,32 +223,33 @@ section:hover {
     color: var(--text-color);
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-#pomodoroControls button {
+  }
+  
+  #pomodoroControls button {
     background-color: var(--primary-color);
     color: var(--text-color);
     border: none;
-}
-
-#pomodoroControls button:hover {
+  }
+  
+  #pomodoroControls button:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-}
-
-/* YouTube Player Styles */
-#youtubePlayer {
+  }
+  
+  /* YouTube Player Styles */
+  #youtubePlayer {
     text-align: center;
-}
-
-#youtubeControls {
+    width: 100%;
+  }
+  
+  #youtubeControls {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
-}
-
-#youtubeLink {
+  }
+  
+  #youtubeLink {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid var(--primary-color);
@@ -254,9 +257,9 @@ section:hover {
     transition: all 0.3s ease;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
-}
-
-#loadVideo, #downloadMedia {
+  }
+  
+  #loadVideo, #downloadMedia {
     padding: 10px 15px;
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -264,39 +267,51 @@ section:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-#loadVideo:hover, #downloadMedia:hover {
+  }
+  
+  #loadVideo:hover, #downloadMedia:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-}
-
-#player {
+  }
+  
+  #player {
     margin-top: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     border-radius: 10px;
     overflow: hidden;
-}
-
-#downloadInfo {
+    max-width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+  }
+  
+  #player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #downloadInfo {
     margin-top: 20px;
     padding: 15px;
     background-color: rgba(76, 175, 80, 0.1);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#downloadInfo h3 {
+  }
+  
+  #downloadInfo h3 {
     margin-top: 0;
     color: var(--primary-color);
-}
-
-#downloadDetails {
+  }
+  
+  #downloadDetails {
     margin-bottom: 15px;
     white-space: pre-line;
-}
-
-#startDownload, #cancelDownload {
+  }
+  
+  #startDownload, #cancelDownload {
     padding: 10px 15px;
     margin-right: 10px;
     background-color: var(--primary-color);
@@ -305,18 +320,114 @@ section:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-#startDownload:hover, #cancelDownload:hover {
+  }
+  
+  #startDownload:hover, #cancelDownload:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-}
-
-#downloadType, #downloadQuality {
+  }
+  
+  #downloadType, #downloadQuality {
     padding: 10px;
     margin-right: 10px;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
     border: 1px solid var(--primary-color);
     border-radius: 5px;
-}
+  }
+  
+  /* Tablet Styles */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    nav {
+      flex-direction: column;
+    }
+  
+    nav button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    #monthsGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    #daysGrid {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  
+    .month, .day {
+      padding: 5px;
+      font-size: 14px;
+    }
+  
+    #timer {
+      font-size: 48px;
+    }
+  
+    #pomodoroControls {
+      flex-direction: column;
+    }
+  
+    #pomodoroControls select,
+    #pomodoroControls button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    #youtubeControls {
+      flex-direction: column;
+    }
+  
+    #youtubeControls input,
+    #youtubeControls select,
+    #youtubeControls button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    #player {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  /* Mobile Styles */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.8em;
+    }
+  
+    #monthsGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    #daysGrid {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  
+    .month, .day {
+      padding: 3px;
+      font-size: 12px;
+    }
+  
+    #timer {
+      font-size: 36px;
+    }
+  
+    #youtubeControls {
+      flex-direction: column;
+    }
+  
+    #youtubeControls > * {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    #player {
+      margin-top: 10px;
+    }
+  }
