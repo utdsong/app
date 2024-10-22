@@ -1,433 +1,444 @@
 :root {
-    --primary-color: #4CAF50;
-    --secondary-color: #45a049;
-    --background-color: #333333;
-    --text-color: #ffffff;
-    --accent-color: #FFD700;
-  }
-  
-  body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
+  --primary-color: #4CAF50;
+  --secondary-color: #45a049;
+  --background-color: #333333;
+  --text-color: #ffffff;
+  --accent-color: #FFD700;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: var(--primary-color);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  font-size: 2.5em;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+nav button {
+  padding: 15px 30px;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+nav button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+nav button:hover::before {
+  left: 0;
+}
+
+nav button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+#profileImage {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#profileImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid var(--primary-color);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+section {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+section:hover {
+  transform: translateZ(30px) scale(1.02);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Calendar Styles */
+#monthsGrid, #daysGrid {
+  display: grid;
+  gap: 10px;
+}
+
+#monthsGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#daysGrid {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.month, .day {
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.month:hover, .day:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+#weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+#backToYear {
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#backToYear:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+#eventForm, #eventDetails {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#eventForm input,
+#eventForm textarea,
+#eventForm button,
+#eventDetails button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+}
+
+#eventForm button,
+#eventDetails button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+}
+
+#eventForm button:hover,
+#eventDetails button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+/* Pomodoro Styles */
+#pomodoroTimer {
+  text-align: center;
+}
+
+#timer {
+  font-size: 72px;
+  margin: 20px 0;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+#pomodoroControls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#pomodoroControls select,
+#pomodoroControls button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#pomodoroControls select {
+  /* Ensure text is visible in dropdowns */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+#pomodoroControls select option {
+  /* Ensure dropdown options are visible */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+#pomodoroControls button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+}
+
+#pomodoroControls button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+/* YouTube Player Styles */
+#youtubePlayer {
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#youtubeControls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#youtubeLink {
+  flex-grow: 1;
+  min-width: 200px;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+}
+
+#loadVideo, #downloadMedia {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#loadVideo:hover, #downloadMedia:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+#playerContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#player {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
+
+#downloadType, #downloadQuality {
+  padding: 10px;
+  margin-right: 10px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+}
+
+#downloadInfo {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#downloadInfo h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+#downloadDetails {
+  margin-bottom: 15px;
+  white-space: pre-line;
+}
+
+#startDownload, #cancelDownload {
+  padding: 10px 15px;
+  margin-right: 10px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#startDownload:hover, #cancelDownload:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
   .container {
-    max-width: 100%;
-    margin: 0 auto;
     padding: 10px;
   }
-  
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  h1 {
-    color: var(--primary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    font-size: 2.5em;
-  }
-  
+
   nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    flex-direction: column;
   }
-  
+
   nav button {
-    padding: 15px 30px;
-    font-size: 16px;
-    background-color: transparent;
-    color: var(--text-color);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  nav button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
     width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    margin-bottom: 10px;
   }
-  
-  nav button:hover::before {
-    left: 0;
-  }
-  
-  nav button.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  #profileImage {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  #profileImg {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 5px solid var(--primary-color);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  
-  section {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-  }
-  
-  section:hover {
-    transform: translateZ(30px) scale(1.02);
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  /* Calendar Styles */
-  #monthsGrid, #daysGrid {
-    display: grid;
-    gap: 10px;
-  }
-  
+
   #monthsGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
-  
+
   #daysGrid {
     grid-template-columns: repeat(7, 1fr);
   }
-  
+
   .month, .day {
-    border: 1px solid var(--primary-color);
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    background-color: rgba(76, 175, 80, 0.1);
+    padding: 5px;
+    font-size: 14px;
   }
-  
-  .month:hover, .day:hover {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-  }
-  
-  #weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: var(--accent-color);
-  }
-  
-  #backToYear {
-    margin-bottom: 10px;
-    padding: 10px 15px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  #backToYear:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-  }
-  
-  #eventForm, #eventDetails {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: rgba(76, 175, 80, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  
-  #eventForm input,
-  #eventForm textarea,
-  #eventForm button,
-  #eventDetails button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-  }
-  
-  #eventForm button,
-  #eventDetails button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    cursor: pointer;
-  }
-  
-  #eventForm button:hover,
-  #eventDetails button:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-  }
-  
-  /* Pomodoro Styles */
-  #pomodoroTimer {
-    text-align: center;
-  }
-  
+
   #timer {
-    font-size: 72px;
-    margin: 20px 0;
-    color: var(--primary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    font-size: 48px;
   }
-  
+
   #pomodoroControls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
   }
-  
+
   #pomodoroControls select,
   #pomodoroControls button {
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  #pomodoroControls button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-  }
-  
-  #pomodoroControls button:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-  }
-  
-  /* YouTube Player Styles */
-  #youtubePlayer {
-    text-align: center;
     width: 100%;
+    margin-bottom: 10px;
   }
-  
+
   #youtubeControls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    flex-direction: column;
   }
-  
-  #youtubeLink {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-  }
-  
-  #loadVideo, #downloadMedia {
-    padding: 10px 15px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  #loadVideo:hover, #downloadMedia:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-  }
-  
-  #player {
-    margin-top: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    overflow: hidden;
-    max-width: 100%;
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-  }
-  
-  #player iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+
+  #youtubeControls input,
+  #youtubeControls select,
+  #youtubeControls button {
     width: 100%;
-    height: 100%;
+    margin-bottom: 10px;
   }
-  
-  #downloadInfo {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: rgba(76, 175, 80, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+  #playerContainer {
+    max-width: 100%;
   }
-  
-  #downloadInfo h3 {
-    margin-top: 0;
-    color: var(--primary-color);
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.8em;
   }
-  
-  #downloadDetails {
-    margin-bottom: 15px;
-    white-space: pre-line;
+
+  #monthsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  #startDownload, #cancelDownload {
-    padding: 10px 15px;
-    margin-right: 10px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+  #daysGrid {
+    grid-template-columns: repeat(7, 1fr);
   }
-  
-  #startDownload:hover, #cancelDownload:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
+
+  .month, .day {
+    padding: 3px;
+    font-size: 12px;
   }
-  
-  #downloadType, #downloadQuality {
-    padding: 10px;
-    margin-right: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
+
+  #timer {
+    font-size: 36px;
   }
-  
-  /* Tablet Styles */
-  @media screen and (max-width: 768px) {
-    .container {
-      padding: 10px;
-    }
-  
-    nav {
-      flex-direction: column;
-    }
-  
-    nav button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    #monthsGrid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  
-    #daysGrid {
-      grid-template-columns: repeat(7, 1fr);
-    }
-  
-    .month, .day {
-      padding: 5px;
-      font-size: 14px;
-    }
-  
-    #timer {
-      font-size: 48px;
-    }
-  
-    #pomodoroControls {
-      flex-direction: column;
-    }
-  
-    #pomodoroControls select,
-    #pomodoroControls button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    #youtubeControls {
-      flex-direction: column;
-    }
-  
-    #youtubeControls input,
-    #youtubeControls select,
-    #youtubeControls button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    #player {
-      width: 100%;
-      height: auto;
-    }
+
+  #youtubeControls {
+    flex-direction: column;
   }
-  
-  /* Mobile Styles */
-  @media screen and (max-width: 480px) {
-    h1 {
-      font-size: 1.8em;
-    }
-  
-    #monthsGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    #daysGrid {
-      grid-template-columns: repeat(7, 1fr);
-    }
-  
-    .month, .day {
-      padding: 3px;
-      font-size: 12px;
-    }
-  
-    #timer {
-      font-size: 36px;
-    }
-  
-    #youtubeControls {
-      flex-direction: column;
-    }
-  
-    #youtubeControls > * {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  
-    #player {
-      margin-top: 10px;
-    }
+
+  #youtubeControls > * {
+    width: 100%;
+    margin-bottom: 10px;
   }
+
+  #playerContainer {
+    margin-top: 10px;
+  }
+}

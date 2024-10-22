@@ -259,31 +259,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadDetails = document.getElementById('downloadDetails');
     const startDownload = document.getElementById('startDownload');
     const cancelDownload = document.getElementById('cancelDownload');
+    const playerContainer = document.getElementById('playerContainer');
     let player;
 
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '360',
-            width: '640',
-            videoId: '',
-            playerVars: {
-                'playsinline': 1
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
+    function createYouTubePlayer(videoId) {
+        if (player) {
+            player.loadVideoById(videoId);
+            playerContainer.style.display = 'block';
+        } else {
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
     }
 
     function onPlayerReady(event) {
         console.log('YouTube player is ready');
+        playerContainer.style.display = 'block';
     }
 
     loadVideo.addEventListener('click', () => {
         playClickSound();
         const videoId = extractVideoID(youtubeLink.value);
         if (videoId) {
-            player.loadVideoById(videoId);
+            createYouTubePlayer(videoId);
         } else {
             alert('Please enter a valid YouTube URL');
         }
@@ -346,5 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return (match && match[7].length == 11) ? match[7] : false;
     }
 
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function() {
+        console.log('YouTube API is ready');
+    }
 });
