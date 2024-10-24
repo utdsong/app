@@ -6,116 +6,63 @@
     <title>Utdam's Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        #playerContainer {
-            display: none;
-            margin-top: 20px;
-            width: 100%;
-            max-width: 640px;
-        }
-        #player {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-        }
-        #profileSetupSection {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        #profilePreview {
-            display: block;
-            width: 150px;
-            height: 150px;
-            margin: 1rem auto;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
-        }
-        .theme-options {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-        }
-        .theme-option {
-            display: flex;
-            align-items: center;
-        }
-        .theme-option input[type="radio"] {
-            margin-right: 0.5rem;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Utdam's Dashboard</h1>
-        </header>
+    <div class="dashboard">
         <nav>
             <button id="profileSetupTab">Profile Setup</button>
-            <button id="calendarTab" class="active">Calendar</button>
+            <button id="calendarTab">Calendar</button>
             <button id="pomodoroTab">Pomodoro</button>
             <button id="youtubeTab">YouTube</button>
+            <button id="todoTab">To-Do List</button>
         </nav>
-        <div id="profileImage">
-            <img src="img/profile2.png" alt="Profile Image" id="profileImg">
-        </div>
         <main>
-            <section id="profileSetupSection" class="hidden">
+            <section id="profileSetupSection">
                 <h2>Set Up Your Profile</h2>
-                <form id="profileSetupForm">
-                    <div class="form-group">
-                        <label for="profilePicture">Profile Picture</label>
-                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
-                        <img id="profilePreview" src="#" alt="Profile Preview" style="display: none;">
+                <div class="profile-setup">
+                    <div class="profile-picture">
+                        <img id="profileImage" src="img/default-avatar.png" alt="Profile Picture">
+                        <input type="file" id="profileImageUpload" accept="image/*">
+                        <label for="profileImageUpload" class="upload-btn">Choose File</label>
                     </div>
-                    <div class="form-group">
-                        <label>Choose Your Theme</label>
+                    <div class="theme-selection">
+                        <h3>Choose Your Theme</h3>
                         <div class="theme-options">
-                            <div class="theme-option">
-                                <input type="radio" id="green" name="theme" value="green" checked>
-                                <label for="green">Green</label>
-                            </div>
-                            <div class="theme-option">
-                                <input type="radio" id="blue" name="theme" value="blue">
-                                <label for="blue">Blue</label>
-                            </div>
-                            <div class="theme-option">
-                                <input type="radio" id="purple" name="theme" value="purple">
-                                <label for="purple">Purple</label>
-                            </div>
+                            <label>
+                                <input type="radio" name="theme" value="green" checked>
+                                Green
+                            </label>
+                            <label>
+                                <input type="radio" name="theme" value="blue">
+                                Blue
+                            </label>
+                            <label>
+                                <input type="radio" name="theme" value="purple">
+                                Purple
+                            </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn">Save Profile</button>
-                </form>
+                    <button id="saveProfile">Save Profile</button>
+                </div>
             </section>
-            <section id="calendarSection">
-                <div id="calendarView">
-                    <div id="yearView">
-                        <h2>2024</h2>
-                        <div id="monthsGrid"></div>
+            <section id="calendarSection" class="hidden">
+                <h2>Calendar</h2>
+                <div id="yearView">
+                    <div id="monthsGrid"></div>
+                </div>
+                <div id="monthView" class="hidden">
+                    <button id="backToYear">Back to Year View</button>
+                    <h3 id="currentMonthYear"></h3>
+                    <div id="weekdays">
+                        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
                     </div>
-                    <div id="monthView" class="hidden">
-                        <button id="backToYear">&larr; Back to Year View</button>
-                        <h2 id="currentMonthYear"></h2>
-                        <div id="weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
-                        </div>
-                        <div id="daysGrid"></div>
-                    </div>
+                    <div id="daysGrid"></div>
                 </div>
                 <div id="eventForm" class="hidden">
-                    <h3>Add/Edit Event</h3>
                     <input type="text" id="eventTitle" placeholder="Event Title">
-                    <input type="color" id="eventColor" value="#4CAF50">
-                    <textarea id="eventComment" placeholder="Comment"></textarea>
-                    <button id="saveEvent">Save</button>
+                    <input type="color" id="eventColor">
+                    <textarea id="eventComment" placeholder="Event Comment"></textarea>
+                    <button id="saveEvent">Save Event</button>
                     <button id="cancelEvent">Cancel</button>
                 </div>
                 <div id="eventDetails" class="hidden">
@@ -126,43 +73,42 @@
                 </div>
             </section>
             <section id="pomodoroSection" class="hidden">
-                <div id="pomodoroTimer">
-                    <h2>Pomodoro Timer</h2>
-                    <div id="timer">25:00</div>
-                    <div id="pomodoroControls">
-                        <select id="pomodoroType">
-                            <option value="25-5">25min work, 5min break</option>
-                            <option value="45-15">45min work, 15min break</option>
-                            <option value="60-20">60min work, 20min break</option>
-                        </select>
-                        <button id="startPomodoro">Start</button>
-                        <button id="resetPomodoro">Reset</button>
-                        <select id="ringtone">
-                            <option value="bell">Bell</option>
-                            <option value="chime">Chime</option>
-                            <option value="gong">Gong</option>
-                        </select>
-                    </div>
+                <img src="img/profile.png" alt="Profile Image" class="profile-image">
+                <h2>Pomodoro Timer</h2>
+                <div id="timer">60:00</div>
+                <div class="pomodoro-controls">
+                    <select id="pomodoroType">
+                        <option value="25-5">25min work, 5min break</option>
+                        <option value="45-15">45min work, 15min break</option>
+                        <option value="60-20" selected>60min work, 20min break</option>
+                    </select>
+                    <button id="startPomodoro">Start</button>
+                    <button id="resetPomodoro">Reset</button>
+                    <select id="ringtone">
+                        <option value="bell">Bell</option>
+                        <option value="digital">Digital</option>
+                        <option value="kitchen">Kitchen</option>
+                    </select>
                 </div>
             </section>
             <section id="youtubeSection" class="hidden">
+                <h2>YouTube</h2>
                 <div id="youtubePlayer">
-                    <h2>YouTube Player</h2>
                     <div id="youtubeControls">
-                        <input type="text" id="youtubeLink" placeholder="Paste YouTube link here">
+                        <input type="text" id="youtubeLink" placeholder="Enter YouTube URL">
                         <button id="loadVideo">Load Video</button>
                         <select id="downloadType">
-                            <option value="audio">Audio</option>
-                            <option value="video">Video</option>
+                            <option value="audio">Audio (MP3)</option>
+                            <option value="video">Video (MP4)</option>
                         </select>
                         <select id="downloadQuality">
-                            <option value="low">Low Quality</option>
-                            <option value="medium">Medium Quality</option>
-                            <option value="high">High Quality</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
                         </select>
                         <button id="downloadMedia">Download</button>
                     </div>
-                    <div id="playerContainer">
+                    <div id="playerContainer" style="display: none;">
                         <div id="player"></div>
                     </div>
                     <div id="downloadInfo" class="hidden">
@@ -173,71 +119,17 @@
                     </div>
                 </div>
             </section>
+            <section id="todoSection" class="hidden">
+                <h2>To-Do List</h2>
+                <input type="text" id="newTodo" placeholder="Add a new task...">
+                <ul id="todoList"></ul>
+                <h3>Archive</h3>
+                <ul id="archiveList"></ul>
+            </section>
         </main>
     </div>
     <audio id="clickSound" src="sound/click.mp3" preload="auto"></audio>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileSetupForm = document.getElementById('profileSetupForm');
-            const profileInput = document.getElementById('profilePicture');
-            const profilePreview = document.getElementById('profilePreview');
-            const profileImg = document.getElementById('profileImg');
-
-            // Load saved profile image and theme
-            const savedProfileImage = localStorage.getItem('profileImage');
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedProfileImage) {
-                profileImg.src = savedProfileImage;
-                profilePreview.src = savedProfileImage;
-                profilePreview.style.display = 'block';
-            }
-
-            if (savedTheme) {
-                document.body.className = savedTheme + '-theme';
-                document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true;
-            }
-
-            profileInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        profilePreview.src = e.target.result;
-                        profilePreview.style.display = 'block';
-                        profileImg.src = e.target.result;
-                        localStorage.setItem('profileImage', e.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            profileSetupForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const theme = document.querySelector('input[name="theme"]:checked').value;
-                localStorage.setItem('theme', theme);
-                document.body.className = theme + '-theme';
-                alert('Profile updated successfully!');
-            });
-
-            // Tab switching logic
-            const tabs = document.querySelectorAll('nav button');
-            const sections = document.querySelectorAll('main section');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    sections.forEach(s => s.classList.add('hidden'));
-                    const sectionToShow = document.getElementById(tab.id.replace('Tab', 'Section'));
-                    if (sectionToShow) {
-                        sectionToShow.classList.remove('hidden');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

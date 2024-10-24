@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const clickSound = document.getElementById('clickSound');
+    
+    const tabs = document.querySelectorAll('nav button');
+    const sections = document.querySelectorAll('main section');
+
+    // Profile Setup
+    const profileImage = document.getElementById('profileImage');
+    const profileImageUpload = document.getElementById('profileImageUpload');
+    const themeOptions = document.querySelectorAll('input[name="theme"]');
+    const saveProfileBtn = document.getElementById('saveProfile');
 
     function playClickSound() {
         clickSound.currentTime = 0;
@@ -12,348 +21,327 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Tab switching
-    const tabs = document.querySelectorAll('nav button');
-    const sections = document.querySelectorAll('main section');
-
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            sections.forEach(s => s.classList.add('hidden'));
+            sections.forEach(s => s.classList.remove('active'));
             const sectionToShow = document.getElementById(tab.id.replace('Tab', 'Section'));
             if (sectionToShow) {
-                sectionToShow.classList.remove('hidden');
+                sectionToShow.classList.add('active');
             }
         });
+    });
+
+    // Profile image upload
+    profileImageUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => profileImage.src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Theme changing
+    themeOptions.forEach(option => {
+        option.addEventListener('change', (event) => {
+            const theme = event.target.value;
+            document.body.className = `theme-${theme}`;
+        });
+    });
+
+    // Save profile
+    saveProfileBtn.addEventListener('click', () => {
+        const selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+        // Here you would typically save the profile data to a backend or local storage
+        console.log('Saving profile:', { profileImage: profileImage.src, theme: selectedTheme });
+        alert('Profile saved successfully!');
     });
 
     // Calendar functionality
     const monthsGrid = document.getElementById('monthsGrid');
     const daysGrid = document.getElementById('daysGrid');
-    const backToYear = document.getElementById('backToYear');
     const currentMonthYear = document.getElementById('currentMonthYear');
+    const backToYear = document.getElementById('backToYear');
     const yearView = document.getElementById('yearView');
     const monthView = document.getElementById('monthView');
-    const eventForm = document.getElementById('eventForm');
-    const eventDetails = document.getElementById('eventDetails');
-    const eventTitle = document.getElementById('eventTitle');
-    const eventColor = document.getElementById('eventColor');
-    const eventComment = document.getElementById('eventComment');
-    const saveEvent = document.getElementById('saveEvent');
-    const cancelEvent = document.getElementById('cancelEvent');
-    const editEvent = document.getElementById('editEvent');
-    const closeEventDetails = document.getElementById('closeEventDetails');
-    const eventDetailsTitle = document.getElementById('eventDetailsTitle');
-    const eventDetailsComment = document.getElementById('eventDetailsComment');
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let currentDate = new Date(2024, 0, 1);
-    let selectedDate = null;
-    let events = {};
+    const currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let selectedMonth = currentDate.getMonth();
 
     function renderYearView() {
         monthsGrid.innerHTML = '';
         months.forEach((month, index) => {
             const monthElement = document.createElement('div');
-            monthElement.classList.add('month');
+            monthElement.className = 'month';
             monthElement.textContent = month;
-            monthElement.addEventListener('click', () => {
-                playClickSound();
-                showMonthView(index);
-            });
+            monthElement.addEventListener('click', () => showMonthView(index));
             monthsGrid.appendChild(monthElement);
         });
+        yearView.classList.remove('hidden');
+        monthView.classList.add('hidden');
     }
 
-    function showMonthView(monthIndex) {
+    function showMonthView(month) {
+        selectedMonth = month;
+        renderMonthView();
         yearView.classList.add('hidden');
         monthView.classList.remove('hidden');
-        currentDate = new Date(2024, monthIndex, 1);
-        renderMonthView();
     }
 
     function renderMonthView() {
+        currentMonthYear.textContent = `${months[selectedMonth]} ${currentYear}`;
         daysGrid.innerHTML = '';
-        currentMonthYear.textContent = `${months[currentDate.getMonth()]} 2024`;
 
-        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const firstDay = new Date(currentYear, selectedMonth, 1).getDay();
+        const daysInMonth = new Date(currentYear, selectedMonth + 1, 0).getDate();
 
-        for (let i = 1; i < firstDay.getDay() || i === 7; i++) {
-            daysGrid.appendChild(createCalendarDay(''));
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.className = 'day';
+            daysGrid.appendChild(emptyDay);
         }
 
-        for (let day = 1; day <= lastDay.getDate(); day++) {
-            const date = `2024-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-            const dayElement = createCalendarDay(day);
-            
-            if (events[date]) {
-                dayElement.style.backgroundColor = events[date].color;
-                dayElement.title = events[date].title;
-            }
-
-            dayElement.addEventListener('click', () => {
-                playClickSound();
-                selectedDate = date;
-                if (events[date]) {
-                    showEventDetails(date);
-                } else {
-                    showEventForm();
-                }
-            });
-
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'day';
+            dayElement.textContent = day;
             daysGrid.appendChild(dayElement);
         }
     }
 
-    function createCalendarDay(content) {
-        const day = document.createElement('div');
-        day.classList.add('day');
-        day.textContent = content;
-        return day;
-    }
+    backToYear.addEventListener('click', renderYearView);
 
-    function showEventForm() {
-        eventForm.classList.remove('hidden');
-        eventDetails.classList.add('hidden');
-    }
-
-    function showEventDetails(date) {
-        const event = events[date];
-        eventDetailsTitle.textContent = event.title;
-        eventDetailsComment.textContent = event.comment;
-        eventDetails.classList.remove('hidden');
-        eventForm.classList.add('hidden');
-    }
-
-    backToYear.addEventListener('click', () => {
-        playClickSound();
-        yearView.classList.remove('hidden');
-        monthView.classList.add('hidden');
-    });
-
-    saveEvent.addEventListener('click', () => {
-        playClickSound();
-        if (selectedDate && eventTitle.value) {
-            events[selectedDate] = {
-                title: eventTitle.value,
-                color: eventColor.value,
-                comment: eventComment.value
-            };
-            renderMonthView();
-            eventForm.classList.add('hidden');
-            eventTitle.value = '';
-            eventComment.value = '';
-        }
-    });
-
-    cancelEvent.addEventListener('click', () => {
-        playClickSound();
-        eventForm.classList.add('hidden');
-        eventTitle.value = '';
-        eventComment.value = '';
-    });
-
-    editEvent.addEventListener('click', () => {
-        playClickSound();
-        const event = events[selectedDate];
-        if (event) {
-            eventTitle.value = event.title;
-            eventColor.value = event.color;
-            eventComment.value = event.comment;
-            showEventForm();
-        }
-    });
-
-    closeEventDetails.addEventListener('click', () => {
-        playClickSound();
-        eventDetails.classList.add('hidden');
-    });
-
+    // Initialize calendar
     renderYearView();
 
     // Pomodoro functionality
-    const pomodoroTimer = document.getElementById('timer');
-    const startPomodoro = document.getElementById('startPomodoro');
-    const resetPomodoro = document.getElementById('resetPomodoro');
+    const timer = document.getElementById('timer');
+    const startPomodoroBtn = document.getElementById('startPomodoro');
+    const resetPomodoroBtn = document.getElementById('resetPomodoro');
     const pomodoroType = document.getElementById('pomodoroType');
     const ringtone = document.getElementById('ringtone');
 
-    let timer;
-    let timeLeft = 25 * 60;
-    let isWorking = true;
-    let originalTitle = document.title;
+    let countdown;
+    let remainingTime = 60 * 60; // 60 minutes in seconds
+    let isRunning = false;
 
-    function updateTimer() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        pomodoroTimer.textContent = timeString;
-        document.title = `${timeString} - Time to focus! | Utdam's Dashboard`;
+    function updateTimerDisplay() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.title = `${timer.textContent} - Pomodoro`;
     }
 
-    function switchPomodoroMode() {
-        const [work, rest] = pomodoroType.value.split('-').map(Number);
-        timeLeft = (isWorking ? rest : work) * 60;
-        isWorking = !isWorking;
-        updateTimer();
-    }
-
-    startPomodoro.addEventListener('click', () => {
-        playClickSound();
-        if (timer) {
-            clearInterval(timer);
-            startPomodoro.textContent = 'Start';
-            timer = null;
-            document.title = originalTitle;
-        } else {
-            timer = setInterval(() => {
-                timeLeft--;
-                updateTimer();
-                if (timeLeft === 0) {
-                    clearInterval(timer);
-                    const audio = new Audio(`assets/sounds/${ringtone.value}.mp3`);
-                    audio.play().catch(error => console.error('Error playing audio:', error));
-                    switchPomodoroMode();
-                    startPomodoro.textContent = 'Start';
-                    timer = null;
+    function startPomodoro() {
+        if (!isRunning) {
+            isRunning = true;
+            startPomodoroBtn.textContent = 'Pause';
+            countdown = setInterval(() => {
+                if (remainingTime > 0) {
+                    remainingTime--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(countdown);
+                    isRunning = false;
+                    playAlarm();
+                    startPomodoroBtn.textContent = 'Start';
                 }
             }, 1000);
-            startPomodoro.textContent = 'Pause';
+        } else {
+            clearInterval(countdown);
+            isRunning = false;
+            startPomodoroBtn.textContent = 'Resume';
         }
-    });
+    }
 
-    resetPomodoro.addEventListener('click', () => {
-        playClickSound();
-        clearInterval(timer);
-        const [work] = pomodoroType.value.split('-').map(Number);
-        timeLeft = work * 60;
-        isWorking = true;
-        updateTimer();
-        startPomodoro.textContent = 'Start';
-        timer = null;
-        document.title = originalTitle;
-    });
+    function resetPomodoro() {
+        clearInterval(countdown);
+        isRunning = false;
+        const [work] = pomodoroType.value.split('-');
+        remainingTime = parseInt(work) * 60;
+        updateTimerDisplay();
+        startPomodoroBtn.textContent = 'Start';
+    }
 
-    pomodoroType.addEventListener('change', () => {
-        playClickSound();
-        const [work] = pomodoroType.value.split('-').map(Number);
-        timeLeft = work * 60;
-        isWorking = true;
-        updateTimer();
-        clearInterval(timer);
-        startPomodoro.textContent = 'Start';
-        timer = null;
-        document.title = originalTitle;
-    });
+    function playAlarm() {
+        const audio = new Audio(`sound/${ringtone.value}.mp3`);
+        audio.play();
+    }
 
-    updateTimer();
+    startPomodoroBtn.addEventListener('click', startPomodoro);
+    resetPomodoroBtn.addEventListener('click', resetPomodoro);
+    pomodoroType.addEventListener('change', resetPomodoro);
+
+    // Initialize timer display
+    updateTimerDisplay();
 
     // YouTube player functionality
-    const youtubeLink = document.getElementById('youtubeLink');
-    const loadVideo = document.getElementById('loadVideo');
+    let player;
+    const loadVideoBtn = document.getElementById('loadVideo');
+    const youtubeLinkInput = document.getElementById('youtubeLink');
+    const playerContainer = document.getElementById('playerContainer');
+    const downloadMediaBtn = document.getElementById('downloadMedia');
     const downloadType = document.getElementById('downloadType');
     const downloadQuality = document.getElementById('downloadQuality');
-    const downloadMedia = document.getElementById('downloadMedia');
     const downloadInfo = document.getElementById('downloadInfo');
     const downloadDetails = document.getElementById('downloadDetails');
-    const startDownload = document.getElementById('startDownload');
-    const cancelDownload = document.getElementById('cancelDownload');
-    const playerContainer = document.getElementById('playerContainer');
-    let player;
+    const startDownloadBtn = document.getElementById('startDownload');
+    const cancelDownloadBtn = document.getElementById('cancelDownload');
 
-    function createYouTubePlayer(videoId) {
-        if (player) {
-            player.loadVideoById(videoId);
+    window.onYouTubeIframeAPIReady = function() {
+        console.log('YouTube API is ready');
+    };
+
+    function loadVideo() {
+        const videoId = extractVideoId(youtubeLinkInput.value);
+        if (videoId) {
+            if (player) {
+                player.loadVideoById(videoId);
+            } else {
+                player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId: videoId,
+                });
+            }
             playerContainer.style.display = 'block';
         } else {
-            player = new YT.Player('player', {
-                height: '360',
-                width: '640',
-                videoId: videoId,
-                playerVars: {
-                    'playsinline': 1
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
+            alert('Invalid YouTube URL');
         }
     }
 
-    function onPlayerReady(event) {
-        console.log('YouTube player is ready');
-        playerContainer.style.display = 'block';
+    function extractVideoId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
     }
-
-    loadVideo.addEventListener('click', () => {
-        playClickSound();
-        const videoId = extractVideoID(youtubeLink.value);
-        if (videoId) {
-            createYouTubePlayer(videoId);
-        } else {
-            alert('Please enter a valid YouTube URL');
-        }
-    });
-
-    downloadMedia.addEventListener('click', () => {
-        playClickSound();
-        const videoId = extractVideoID(youtubeLink.value);
-        if (videoId) {
-            const type = downloadType.value;
-            const quality = downloadQuality.value;
-            showDownloadInfo(videoId, type, quality);
-        } else {
-            alert('Please enter a valid YouTube URL');
-        }
-    });
-
-    function showDownloadInfo(videoId, type, quality) {
-        downloadDetails.textContent = `Preparing to download ${type} for video ID: ${videoId}\nQuality: ${quality}`;
-        downloadInfo.classList.remove('hidden');
-    }
-
-    startDownload.addEventListener('click', () => {
-        playClickSound();
-        simulateDownload();
-    });
-
-    let downloadInterval;
-    const progressBar = document.createElement('div');
-    progressBar.style.width = '0%';
-    progressBar.style.height = '20px';
-    progressBar.style.backgroundColor = 'var(--primary-color)';
-    progressBar.style.transition = 'width 0.5s';
 
     function simulateDownload() {
+        downloadInfo.classList.remove('hidden');
+        downloadDetails.textContent = `Preparing to download ${downloadType.value} in ${downloadQuality.value} quality...`;
+    }
+
+    function startDownload() {
         let progress = 0;
-        downloadInfo.appendChild(progressBar);
-        downloadInterval = setInterval(() => {
+        const interval = setInterval(() => {
             progress += 10;
-            progressBar.style.width = `${progress}%`;
+            downloadDetails.textContent = `Downloading: ${progress}%`;
             if (progress >= 100) {
-                clearInterval(downloadInterval);
-                alert('Download completed! (This is a simulated action)');
-                downloadInfo.classList.add('hidden');
-                downloadInfo.removeChild(progressBar);
+                clearInterval(interval);
+                downloadDetails.textContent = 'Download complete!';
+                setTimeout(() => {
+                    downloadInfo.classList.add('hidden');
+                }, 2000);
             }
         }, 500);
     }
 
-    cancelDownload.addEventListener('click', () => {
-        playClickSound();
-        clearInterval(downloadInterval);
-        downloadInfo.removeChild(progressBar);
+    loadVideoBtn.addEventListener('click', loadVideo);
+    downloadMediaBtn.addEventListener('click', simulateDownload);
+    startDownloadBtn.addEventListener('click', startDownload);
+    cancelDownloadBtn.addEventListener('click', () => {
         downloadInfo.classList.add('hidden');
     });
 
-    function extractVideoID(url) {
-        const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-        const match = url.match(regExp);
-        return (match && match[7].length == 11) ? match[7] : false;
+    // To-Do List functionality
+    const todoInput = document.getElementById('newTodo');
+    const todoList = document.getElementById('todoList');
+    const archiveList = document.getElementById('archiveList');
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+    let archivedTodos = JSON.parse(localStorage.getItem('archivedTodos')) || [];
+
+    function renderTodos() {
+        todoList.innerHTML = '';
+        todos.forEach((todo, index) => {
+            const li = document.createElement('li');
+            li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            li.innerHTML = `
+                <input type="checkbox" ${todo.completed ? 'checked' : ''}>
+                <span class="todo-text">${todo.text}</span>
+                <button class="comment-btn">Comment</button>
+                <button class="delete-btn">Delete</button>
+                <div class="todo-comment">${todo.comment || ''}</div>
+            `;
+            
+            const checkbox = li.querySelector('input[type="checkbox"]');
+            checkbox.addEventListener('change', () => {
+                todos[index].completed = checkbox.checked;
+                saveTodos();
+                renderTodos();
+            });
+
+            const commentBtn = li.querySelector('.comment-btn');
+            commentBtn.addEventListener('click', () => {
+                const comment = prompt('Add a comment:', todo.comment);
+                if (comment !== null) {
+                    todos[index].comment = comment;
+                    saveTodos();
+                    renderTodos();
+                }
+            });
+
+            const deleteBtn = li.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', () => {
+                archivedTodos.push(todos[index]);
+                todos.splice(index, 1);
+                saveTodos();
+                saveArchivedTodos();
+                renderTodos();
+                renderArchivedTodos();
+            });
+
+            todoList.appendChild(li);
+        });
     }
 
-    window.onYouTubeIframeAPIReady = function() {
-        console.log('YouTube API is ready');
+    function renderArchivedTodos() {
+        archiveList.innerHTML = '';
+        archivedTodos.forEach((todo, index) => {
+            const li = document.createElement('li');
+            li.className = 'todo-item';
+            li.innerHTML = `
+                <span class="todo-text">${todo.text}</span>
+                <button class="restore-btn">Restore</button>
+            `;
+
+            const restoreBtn = li.querySelector('.restore-btn');
+            restoreBtn.addEventListener('click', () => {
+                todos.push(archivedTodos[index]);
+                archivedTodos.splice(index, 1);
+                saveTodos();
+                saveArchivedTodos();
+                renderTodos();
+                renderArchivedTodos();
+            });
+
+            archiveList.appendChild(li);
+        });
     }
+
+    function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    function saveArchivedTodos() {
+        localStorage.setItem('archivedTodos', JSON.stringify(archivedTodos));
+    }
+
+    todoInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && this.value.trim() !== '') {
+            todos.push({ text: this.value.trim(), completed: false, comment: '' });
+            this.value = '';
+            saveTodos();
+            renderTodos();
+        }
+    });
+
+    renderTodos();
+    renderArchivedTodos();
+
+    // Set Profile Setup as the default active tab
+    document.getElementById('profileSetupTab').click();
 });
