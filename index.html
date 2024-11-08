@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SonShine Kids Cambodia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        .hero-decoration {
+            position: absolute;
+            z-index: -1;
+        }
+        .hero-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .hero-rectangle {
+            width: 50px;
+            height: 20px;
+        }
+        @media (min-width: 640px) {
+            .hero-circle {
+                width: 50px;
+                height: 50px;
+            }
+            .hero-rectangle {
+                width: 80px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-[#187ea8]">
+    <header class="fixed top-0 left-0 right-0 bg-white z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <img src="img/logo.png alt="SonShine Kids International Logo" class="w-auto h-12">
+            <nav class="hidden lg:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#home" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">About</a></li>
+                    <li><a href="#gallery" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Gallery</a></li>
+                    <li><a href="#videos" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Videos</a></li>
+                </ul>
+            </nav>
+            <button id="menuBtn" class="lg:hidden text-[#187ea8] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:hidden bg-white w-64 z-50 shadow-lg transition-transform duration-300 ease-in-out">
+        <div class="p-6">
+            <button id="closeBtn" class="absolute top-3 right-3 text-[#187ea8] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <nav class="mt-8">
+                <ul class="space-y-4">
+                    <li><a href="#home" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">About</a></li>
+                    <li><a href="#gallery" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Gallery</a></li>
+                    <li><a href="#videos" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Videos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <section id="home" class="pt-32 sm:pt-40 pb-12 relative overflow-hidden min-h-[600px]">
+            <div class="hero-decoration hero-circle bg-[#ff6c9e] top-28 left-4"></div>
+            <div class="hero-decoration hero-rectangle bg-[#e1df32] top-40 left-16 rotate-45"></div>
+            <div class="hero-decoration hero-circle bg-[#88c7d8] top-28 right-4"></div>
+            <div class="hero-decoration hero-rectangle bg-[#187ea8] top-40 right-16 -rotate-45"></div>
+            <div class="hero-decoration hero-circle bg-[#e1df32] bottom-4 left-4"></div>
+            <div class="hero-decoration hero-rectangle bg-[#ff6c9e] bottom-16 left-16 -rotate-45"></div>
+            <div class="hero-decoration hero-circle bg-[#187ea8] bottom-4 right-4"></div>
+            <div class="hero-decoration hero-rectangle bg-[#88c7d8] bottom-16 right-16 rotate-45"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-full">
+                <div class="w-full text-center mb-8 relative z-10">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">SonShine Kids Cambodia</h1>
+                    <p class="text-lg sm:text-xl mb-6">Bilingual Pre-School: Khmer and English</p>
+                    <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" class="bg-[#e1df32] text-[#187ea8] hover:bg-[#d1cf22] px-6 py-2 rounded-md transition-colors">
+                        About Us
+                    </button>
+                    <div class="mt-8 w-full max-w-2xl mx-auto">
+                        <img src="img/imgheader.png" alt="SonShine Kids International Header" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="absolute top-0 left-0 w-64 h-64 bg-[#ff6c9e] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-[#88c7d8] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-20 w-64 h-64 bg-[#e1df32] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        </section>
+
+        <section id="about" class="py-12 bg-[#f9f9f9]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4">About Us</h2>
+                    <p class="max-w-2xl mx-auto mb-8 text-sm sm:text-base">
+                        SonShine Kids International is a bilingual kindergarten offering education in both Khmer and English. 
+                        Our dedicated team of local and international teachers provides a nurturing environment for children to learn, grow, and thrive.
+                    </p>
+                    <button onclick="openContactModal()" class="bg-[#e1df32] text-[#187ea8] hover:bg-[#d1cf22] px-6 py-2 rounded-md transition-colors">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8">Our Happy Students</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                        <img src="img/sonshine/activity1.png" alt="Gallery Image 1" class="w-full h-auto">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                        <img src="img/sonshine/activity2.png" alt="Gallery Image 2" class="w-full h-auto">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                        <img src="img/sonshine/activity3.png" alt="Gallery Image 3" class="w-full h-auto">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                        <img src="img/sonshine/activity4.png" alt="Gallery Image 4" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="videos" class="py-12 bg-[#f9f9f9]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8">Class Activities</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-lg"></iframe>
+                    </div>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-lg"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#187ea8] text-white py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> SonShine Kids International. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center hidden">
+        <div class="bg-white p-4 sm:p-8 rounded-lg max-w-md w-full mx-4 relative">
+            <button onclick="closeContactModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="text-center">
+                <h2 class="text-xl sm:text-2xl font-bold mb-4">Contact Us</h2>
+                <p class="mb-2 text-sm sm:text-base">Get in touch with SonShine Kids International</p>
+                <div class="grid gap-4 py-4 text-sm sm:text-base">
+                    <p>Phone: +855 77 39 36 12</p>
+                    <p>Email: info@sonshinekids.com</p>
+                    <p>Facebook: <a href="https://www.facebook.com/SonshineKidscambodia" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Sonshine Kids Cambodia</a></p>
+                </div>
+                <div class="h-[200px] sm:h-[300px] mt-4">
+                    <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.8465504868013!2d104.89399477447871!3d11.5628560886378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510b95c1f781%3A0x89fa6581a9aa5d88!2sSonShine%20Kids%20International!5e0!3m2!1sen!2skh!4v1730189660313!5m2!1sen!2skh" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar functionality
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        // Highlight active section in navigation
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('font-bold');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('font-bold');
+                }
+            });
+        });
+
+        // Contact modal functionality
+        const contactModal = document.getElementById('contactModal');
+
+        function openContactModal() {
+            contactModal.style.display = 'flex';
+        }
+
+        function closeContactModal() {
+            contactModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        contactModal.addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeContactModal();
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animate-fade-in-up');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check on page load
+    </script>
+</body>
+</html>
