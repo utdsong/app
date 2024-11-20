@@ -1,0 +1,288 @@
+:root {
+    --primary-blue: #4AB8FF;
+    --white: #FFFFFF;
+    --yellow: #FFD600;
+    --text-gray: #666666;
+    --card-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+    --accent-pink: #FF8FB3;
+    --accent-green: #7ED957;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: var(--white);
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: var(--white);
+}
+
+.logo-img {
+    height: 40px;
+}
+
+nav {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.donate-btn {
+    background: var(--accent-pink);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.donate-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Hero Section */
+.hero {
+    background: var(--primary-blue);
+    margin: 2rem 4rem;
+    border-radius: 24px;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+}
+
+.hero-content {
+    max-width: 55%;
+    color: var(--white);
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin: 1rem 0;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.enroll-btn {
+    background: var(--yellow);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.enroll-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Program Cards */
+.program-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 4rem;
+}
+
+.program-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+}
+
+.program-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 700;
+}
+
+.program-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Facilities Section */
+.facilities {
+    margin: 4rem;
+}
+
+.facilities h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+}
+
+.facilities > p {
+    color: var(--text-gray);
+    margin-bottom: 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.facility-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+}
+
+.facility-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.facility-info {
+    padding: 1.5rem;
+}
+
+.facility-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.facility-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #F0F9FF;
+    color: var(--primary-blue);
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.tour-btn {
+    background: var(--accent-green);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+.tour-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-illustration {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero {
+        margin: 1rem;
+        padding: 2rem;
+    }
+    
+    .program-cards {
+        grid-template-columns: 1fr;
+        margin: 2rem 1rem;
+    }
+    
+    .facility-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .facilities {
+        margin: 2rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
