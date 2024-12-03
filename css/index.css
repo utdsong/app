@@ -1,0 +1,206 @@
+/* Brand Colors - keeping consistent with donate page */
+:root {
+    --primary-blue: #187ea8;
+    --secondary-blue: #88c7d8;
+    --primary-pink: #ff6c9e;
+    --primary-yellow: #e1df32;
+    --background: #ffffff;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, rgba(136, 199, 216, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+    padding: 8rem 0 4rem;
+}
+
+/* Card Styles - consistent with donate page */
+.card-3d {
+    background: var(--background);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-3d:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.15),
+        0 8px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-blue);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Program Features */
+.feature-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid rgba(24, 126, 168, 0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+}
+
+/* Image Styles */
+.rounded-image {
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.rounded-image:hover {
+    transform: scale(1.02);
+}
+
+/* Button Styles */
+.btn-3d {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+}
+
+.btn-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+
+.btn-secondary {
+    background-color: var(--primary-pink);
+    color: var(--text-light);
+}
+
+/* Section Styles */
+.section-padding {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    background: linear-gradient(135deg, rgba(255, 108, 158, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid rgba(255, 108, 158, 0.1);
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.gallery-item {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .card-3d {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Animation for Decorative Elements */
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Donate Button Specific Styles */
+nav .btn-3d {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(255, 108, 158, 0.25);
+    transition: all 0.3s ease;
+}
+
+nav .btn-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(255, 108, 158, 0.35);
+} 

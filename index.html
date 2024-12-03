@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SonShine Kids Cambodia</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/index.css">
     <style>
         @keyframes blob {
             0% { transform: translate(0px, 0px) scale(1); }
@@ -47,23 +48,21 @@
     </style>
 </head>
 <body class="min-h-screen bg-white text-[#187ea8]">
-    <header class="fixed top-0 left-0 right-0 bg-white z-50 shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <img src="img/logo.png alt="SonShine Kids Cambodia Logo" class="w-auto h-12">
-            <nav class="hidden lg:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#home" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Home</a></li>
-                    <li><a href="#about" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">About</a></li>
-                    <li><a href="#gallery" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Gallery</a></li>
-                    <li><a href="#videos" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Videos</a></li>
-                </ul>
-            </nav>
-            <button id="menuBtn" class="lg:hidden text-[#187ea8] focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+            <a href="index.html" class="text-xl font-bold text-[#187ea8]">SonShine Kids Cambodia</a>
+            <ul class="flex items-center space-x-6">
+                <li><a href="about.html" class="nav-link text-[#187ea8]">About Us</a></li>
+                <li><a href="programs.html" class="nav-link text-[#187ea8]">Programs</a></li>
+                <li><a href="contact.html" class="nav-link text-[#187ea8]">Contact</a></li>
+                <li>
+                    <a href="donate.html" 
+                       class="btn-3d bg-[#ff6c9e] text-white px-6 py-2 rounded-full hover:bg-[#ff5b8f] transition-colors">
+                        Donate
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <div id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:hidden bg-white w-64 z-50 shadow-lg transition-transform duration-300 ease-in-out">
@@ -79,6 +78,7 @@
                     <li><a href="#about" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">About</a></li>
                     <li><a href="#gallery" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Gallery</a></li>
                     <li><a href="#videos" class="text-[#187ea8] hover:text-[#ff6c9e] transition-colors">Videos</a></li>
+                    <li><a href="donate.html" class="text-[#ff6c9e] hover:text-[#d1cf22] transition-colors">Donate</a></li>
                 </ul>
             </nav>
         </div>

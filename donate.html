@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - SonShine Kids Cambodia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/donate.css">
+</head>
+<body class="min-h-screen bg-white text-[#187ea8]">
+    <!-- [Header and navigation remain the same] -->
+
+    <main>
+        <section class="pt-32 sm:pt-40 pb-12 relative overflow-hidden">
+            <div class="container mx-auto px-4">
+                <h1 class="text-center text-3xl sm:text-4xl md:text-5xl font-bold mb-8">Support Our Students</h1>
+                <p class="text-center max-w-2xl mx-auto mb-12">Your donation helps provide quality education to children in Cambodia. Choose your preferred donation plan below.</p>
+
+                <!-- Donation Plans -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- 3 Months Plan -->
+                    <div class="card-3d plan-3months">
+                        <h3 class="text-xl font-bold mb-4 text-center text-[#ff6c9e]">3 Months Scholarship</h3>
+                        <div class="mb-6">
+                            <label class="block mb-2 text-center text-[#187ea8]">Number of Students:</label>
+                            <div class="student-counter">
+                                <button onclick="decreaseStudents('3months')" class="btn-3d bg-[#ff6c9e] text-white w-10 h-10 rounded-full">-</button>
+                                <span id="students3months" class="student-number text-[#187ea8]">1</span>
+                                <button onclick="increaseStudents('3months')" class="btn-3d bg-[#ff6c9e] text-white w-10 h-10 rounded-full">+</button>
+                            </div>
+                            <p class="total-amount text-[#187ea8]">Total: $<span id="total3months">300</span></p>
+                        </div>
+                        <button onclick="handleDonation('3months')" class="btn-3d w-full bg-[#ff6c9e] text-white px-6 py-3 rounded-full">
+                            Donate Now
+                        </button>
+                    </div>
+
+                    <!-- 6 Months Plan -->
+                    <div class="card-3d plan-6months">
+                        <h3 class="text-xl font-bold mb-4 text-center text-[#e1df32]">6 Months Scholarship</h3>
+                        <div class="mb-6">
+                            <label class="block mb-2 text-center text-[#187ea8]">Number of Students:</label>
+                            <div class="student-counter">
+                                <button onclick="decreaseStudents('6months')" class="btn-3d bg-[#e1df32] text-[#187ea8] w-10 h-10 rounded-full">-</button>
+                                <span id="students6months" class="student-number text-[#187ea8]">1</span>
+                                <button onclick="increaseStudents('6months')" class="btn-3d bg-[#e1df32] text-[#187ea8] w-10 h-10 rounded-full">+</button>
+                            </div>
+                            <p class="total-amount text-[#187ea8]">Total: $<span id="total6months">550</span></p>
+                        </div>
+                        <button onclick="handleDonation('6months')" class="btn-3d w-full bg-[#e1df32] text-[#187ea8] px-6 py-3 rounded-full">
+                            Donate Now
+                        </button>
+                    </div>
+
+                    <!-- 1 Year Plan -->
+                    <div class="card-3d plan-1year">
+                        <h3 class="text-xl font-bold mb-4 text-center text-[#187ea8]">1 Year Scholarship</h3>
+                        <div class="mb-6">
+                            <label class="block mb-2 text-center text-[#187ea8]">Number of Students:</label>
+                            <div class="student-counter">
+                                <button onclick="decreaseStudents('1year')" class="btn-3d bg-[#187ea8] text-white w-10 h-10 rounded-full">-</button>
+                                <span id="students1year" class="student-number text-[#187ea8]">1</span>
+                                <button onclick="increaseStudents('1year')" class="btn-3d bg-[#187ea8] text-white w-10 h-10 rounded-full">+</button>
+                            </div>
+                            <p class="total-amount text-[#187ea8]">Total: $<span id="total1year">1000</span></p>
+                        </div>
+                        <button onclick="handleDonation('1year')" class="btn-3d w-full bg-[#187ea8] text-white px-6 py-3 rounded-full">
+                            Donate Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Inquiry Form -->
+                <div class="max-w-2xl mx-auto card-3d bg-gradient-to-br from-[#88c7d8]/10 to-white mt-16">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-[#187ea8]">Inquire About Our Scholarship Program</h2>
+                    <form id="inquiryForm" onsubmit="handleInquiry(event)" class="space-y-6">
+                        <div>
+                            <label class="block mb-2 text-[#187ea8]">Full Name *</label>
+                            <input type="text" name="name" required 
+                                class="w-full p-3 border-2 border-[#88c7d8] rounded-lg focus:border-[#187ea8] focus:ring-2 focus:ring-[#187ea8]/20 transition-all">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-[#187ea8]">Email *</label>
+                            <input type="email" name="email" required 
+                                class="w-full p-3 border-2 border-[#88c7d8] rounded-lg focus:border-[#187ea8] focus:ring-2 focus:ring-[#187ea8]/20 transition-all">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-[#187ea8]">Phone (optional)</label>
+                            <input type="tel" name="phone" 
+                                class="w-full p-3 border-2 border-[#88c7d8] rounded-lg focus:border-[#187ea8] focus:ring-2 focus:ring-[#187ea8]/20 transition-all">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-[#187ea8]">Message *</label>
+                            <textarea name="message" required 
+                                class="w-full p-3 border-2 border-[#88c7d8] rounded-lg focus:border-[#187ea8] focus:ring-2 focus:ring-[#187ea8]/20 transition-all h-32"></textarea>
+                        </div>
+                        <button type="submit" 
+                            class="btn-3d w-full bg-[#187ea8] text-white px-6 py-3 rounded-full hover:bg-[#156c8f] transition-colors">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const prices = {
+            '3months': 300,
+            '6months': 550,
+            '1year': 1000
+        };
+
+        function increaseStudents(plan) {
+            const element = document.getElementById(`students${plan}`);
+            const totalElement = document.getElementById(`total${plan}`);
+            let current = parseInt(element.textContent);
+            if (current < 4) {
+                current++;
+                element.textContent = current;
+                totalElement.textContent = (current * prices[plan]).toLocaleString();
+            }
+        }
+
+        function decreaseStudents(plan) {
+            const element = document.getElementById(`students${plan}`);
+            const totalElement = document.getElementById(`total${plan}`);
+            let current = parseInt(element.textContent);
+            if (current > 1) {
+                current--;
+                element.textContent = current;
+                totalElement.textContent = (current * prices[plan]).toLocaleString();
+            }
+        }
+
+        function handleDonation(plan) {
+            const numStudents = document.getElementById(`students${plan}`).textContent;
+            const total = document.getElementById(`total${plan}`).textContent;
+            // Here you would integrate with your payment provider
+            alert(`Processing donation for ${numStudents} student(s), total: $${total}`);
+        }
+
+        function handleInquiry(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const mailtoLink = `mailto:utdamsong777@gmail.com?subject=Scholarship Program Inquiry&body=Name: ${formData.get('name')}%0D%0AEmail: ${formData.get('email')}%0D%0APhone: ${formData.get('phone')}%0D%0AMessage: ${formData.get('message')}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+
+    <script src="js/donate.js"></script>
+</body>
+</html>
